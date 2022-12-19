@@ -16,6 +16,5 @@ const loginSubmit = (event) => {
     localStorage.setItem('player', loginName.value)
     window.location = 'pages/game.html'
 }
-loginName.value = localStorage.player
 loginName.addEventListener('input', loginCheck)
 form.addEventListener('submit', loginSubmit)
