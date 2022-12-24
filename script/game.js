@@ -1,11 +1,8 @@
-const card = document.querySelector('.card')
-const metter = document.querySelector('.meter')
-const timer = document.querySelector('.timer')
-let endGame = false
-
+let currentTime = 0
+let correctCards = 0
+let count = 0
 let firstCard = ''
 let secondCard = ''
-let count = 0
 
 const startGame = () => {
 	const characters = [
@@ -17,7 +14,6 @@ const startGame = () => {
 		'morty',
 		'meeseeks',
 		'jessica',
-
 		'jerry',
 		'beth',
 	]
@@ -26,47 +22,52 @@ const startGame = () => {
 	createCard(shuffleCharacter)
 }
 
-const createElement = (tag, className) => {
-	const element = document.createElement(tag)
-	element.className = className
-	return element
-}
-
 const createCard = (characters) => {
 	const cardGrid = document.querySelector('.card-grid')
 
+	setName()
+
 	characters.forEach((character) => {
 		const card = createElement('div', 'card')
-		card.setAttribute('character', 'beth')
+		card.setAttribute('character', character)
 		cardGrid.appendChild(card)
 
 		const front = createElement('div', 'face front')
-		// front.style.backgroundImage = `url(../images/${character}.png)`
-		front.style.backgroundImage = `url(../images/beth.png)`
+		front.style.backgroundImage = `url(../images/${character}.png)`
 		card.appendChild(front)
 
 		const back = createElement('div', 'face back')
 		back.style.backgroundImage = 'url(../images/back.png)'
 		card.appendChild(back)
 
-		// card.addEventListener('click', revealCard)
 		card.addEventListener('click', revealCard)
 	})
+}
+
+const createElement = (tag, className) => {
+	const element = document.createElement(tag)
+	element.className = className
+	return element
+}
+
+const setName = () => {
+	const playerName = document.querySelector('.player-name')
+	playerName.childNodes[1].innerHTML = localStorage.getItem('player')
 }
 
 const checkCard = () => {
 	const firstCharacter = firstCard.getAttribute('character')
 	const secondCharacter = secondCard.getAttribute('character')
-	
+
 	if (firstCharacter == secondCharacter) {
 		firstCard = ''
 		secondCard = ''
-		return
+		correctCards++
 	} else {
 		setTimeout(() => {
 			firstCard.classList.remove('active')
 			secondCard.classList.remove('active')
-			
+
 			firstCard = ''
 			secondCard = ''
 		}, 500)
@@ -74,6 +75,9 @@ const checkCard = () => {
 }
 
 const meterCount = () => {
+	const metter = document.querySelector('.meter')
+
+	count++
 	if (count < 10) {
 		metter.innerHTML = '0' + count
 	} else {
@@ -85,40 +89,37 @@ const revealCard = ({ target }) => {
 	if (target.parentNode.className.includes('active')) {
 		return
 	}
-	
+
 	if (firstCard == '') {
 		target.parentNode.classList.add('active')
 		firstCard = target.parentNode
 	} else if (secondCard == '') {
 		target.parentNode.classList.add('active')
 		secondCard = target.parentNode
-		count++
-		timerCount()
+
 		meterCount()
-		
 		checkCard()
 	}
-	
-	if (count == 10) {
-		endGame = true
-		alert('You won!!')
+
+	if (correctCards == 10) {
+		setTimeout(() => {
+			clearInterval(interval)
+			alert('Você ganhou!!')
+		}, 500)
 	}
 }
-
-startGame()
-
-/* working */
 
 const timerCount = () => {
-	const currentTime = 0
-	while (endGame == false) {
-		setInterval(() => {
-			if (count < 10) {
-				timer.innerHTML = '0' + currentTime
-			} else {
-				timer.innerHTML = currentTime
-			}
-			currentTime++
-		}, 1000)
+	const timer = document.querySelector('.timer')
+
+	if (currentTime < 10) {
+		timer.innerHTML = '0' + currentTime
+	} else {
+		timer.innerHTML = currentTime
 	}
+	currentTime++
 }
+
+const interval = setInterval(timerCount, 1000)
+
+startGame()
