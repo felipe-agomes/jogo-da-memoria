@@ -6,6 +6,9 @@
 }
 
 body {
+    background: url(../images/bg.jpg);
+    background-size: cover;
+    background-position: center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,11 +20,18 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 0 30px;
+    margin: 10px 0;
     width: 600px;
     height: 70px;
     background: #ddd;
     border: solid 3px #444;
     border-radius: 20px;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+header .count p {
+    display: inline-block;
 }
 
 main.card-grid {
@@ -30,7 +40,7 @@ main.card-grid {
     gap: 10px;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat( 4, 1fr);
-    height: calc(100vh - 70px);
+    height: calc(100vh - 100px);
 }
 
 main.card-grid .card {
@@ -44,6 +54,8 @@ main.card-grid .card .face {
     position: absolute;
     width: 100%;
     height: 100%;
+    border-radius: 10px;
+    border: solid 3px #69ef7f
 }
 
 main.card-grid .card .back {
@@ -54,7 +66,6 @@ main.card-grid .card .back {
 }
 
 main.card-grid .card .front {
-    /* background: url(../images/beth.png); */
     transform: translateY(180deg);
     background-size: cover;
     background-position: center;
