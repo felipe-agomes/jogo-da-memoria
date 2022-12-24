@@ -20,28 +20,64 @@ const startGame = () => {
 	let duplicateCharacters = [...characters, ...characters]
 	const shuffleCharacter = duplicateCharacters.sort(() => Math.random() - 0.5)
 	createCard(shuffleCharacter)
+	timerToStart()
+	setName()
 }
 
 const createCard = (characters) => {
 	const cardGrid = document.querySelector('.card-grid')
 
-	setName()
-
 	characters.forEach((character) => {
 		const card = createElement('div', 'card')
 		card.setAttribute('character', character)
+		// card.setAttribute('character', 'beth')
 		cardGrid.appendChild(card)
 
 		const front = createElement('div', 'face front')
 		front.style.backgroundImage = `url(../images/${character}.png)`
+		// front.style.backgroundImage = `url(../images/beth.png)`
 		card.appendChild(front)
 
 		const back = createElement('div', 'face back')
 		back.style.backgroundImage = 'url(../images/back.png)'
 		card.appendChild(back)
-
-		card.addEventListener('click', revealCard)
 	})
+}
+
+const timerToStart = () => {
+	const ContainerCounter = document.querySelector('.counter-to-start')
+	const counter = ContainerCounter.childNodes[3]
+	let time = 3
+	const timer = setInterval(() => {
+		counter.innerHTML = time
+		time--
+		
+		if (time == -1) {
+			const allCard = document.querySelectorAll('.card')
+			
+			allCard.forEach((card) => {
+				card.addEventListener('click', revealCard)
+			})
+			
+			ContainerCounter.style.display = 'none'
+			
+			timerCount()
+			clearInterval(timer)
+			revealAllCards(1000)
+		}
+	}, 1000)
+}
+
+const revealAllCards = (time) => {
+	const allCard = document.querySelectorAll('.card')
+	allCard.forEach((card) => {
+		card.classList.add('active')
+	})
+	setTimeout(() => {
+		allCard.forEach((card) => {
+			card.classList.remove('active')
+		})
+	}, time)
 }
 
 const createElement = (tag, className) => {
@@ -89,37 +125,34 @@ const revealCard = ({ target }) => {
 	if (target.parentNode.className.includes('active')) {
 		return
 	}
-
 	if (firstCard == '') {
 		target.parentNode.classList.add('active')
 		firstCard = target.parentNode
 	} else if (secondCard == '') {
 		target.parentNode.classList.add('active')
 		secondCard = target.parentNode
-
+		
 		meterCount()
 		checkCard()
-	}
-
-	if (correctCards == 10) {
-		setTimeout(() => {
-			clearInterval(interval)
-			alert('Você ganhou!!')
-		}, 500)
 	}
 }
 
 const timerCount = () => {
 	const timer = document.querySelector('.timer')
 
-	if (currentTime < 10) {
-		timer.innerHTML = '0' + currentTime
-	} else {
-		timer.innerHTML = currentTime
-	}
-	currentTime++
-}
+	const interval = setInterval(() => {
+		if (currentTime < 10) {
+			timer.innerHTML = '0' + currentTime
+		} else {
+			timer.innerHTML = currentTime
+		}
+		currentTime++
 
-const interval = setInterval(timerCount, 1000)
+		if (correctCards == 10) {
+			clearInterval(interval)
+			alert('Você ganhou!!')
+		}
+	}, 1000)
+}
 
 startGame()
