@@ -1,104 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Memory Game</title>
+		<link
+			rel="shortcut icon"
+			href="/images/brain.png"
+			type="image/x-icon"
+		/>
 		<link rel="stylesheet" href="../style/game.css" />
 	</head>
 	<body>
+		<div class="counter-to-start">
+			<h2>Se prepare!</h2>
+			<p>3</p>
+		</div>
 		<header>
 			<div class="player-name">
-				<p>Felipe</p>
+				<p></p>
 			</div>
 			<div class="count">
-				<p>03</p>
+				<p>Tentativas:</p>
+				<p class="attempts">00</p>
 			</div>
-			<div class="timer">
-				<p>01</p>
+			<div class="count">
+				<p>Tempo:</p>
+				<p class="timer">00</p>
 			</div>
 		</header>
-		<main class="card-grid">
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
-			<div class="card">
-				<div class="face front"></div>
-				<div class="face back"></div>
-			</div>
+		<main class="card-grid"></main>
+		<script src="../script/game.js"></script>
 	</body>
 </html>
