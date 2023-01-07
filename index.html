@@ -5,6 +5,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>login | Memory Game</title>
+		<link
+			rel="shortcut icon"
+			href="/images/brain.png"
+			type="image/x-icon"
+		/>
 		<link rel="stylesheet" href="./style/login.css" />
 	</head>
 	<body>
@@ -13,9 +18,15 @@
 				<img src="./images/brain.png" />
 				<h2>Login</h2>
 			</div>
-			<input type="text" placeholder="Nome" class="login-name" />
+			<input
+				type="text"
+				placeholder="Nome"
+				class="login-name"
+				autofocus
+				maxlength="18"
+			/>
 			<button type="submit" class="login-button" disabled>Enviar</button>
 		</form>
-        <script src="./script/login.js"></script>
+		<script src="./script/login.js"></script>
 	</body>
 </html>
